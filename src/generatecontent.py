@@ -10,7 +10,18 @@ def send_prompt_with_document(section, title):
   api_version = get_openai_details(apikeyPath, "OPENAI_API_VERSION_V2")
   azure_endpoint = get_openai_details(apikeyPath, "OPENAI_API_ENDPOINT_V2")
     
-  prompt = "Assume the role of a user of a generative AI product. Given the contents of a document and its title, generate a single question, phrase, or statement that is coherent english. The question, statement, or phrase should be short in length, and cover either main ideas, specific details, or implications, and can use slang, short forms of words, etc. Do not include the document title or role of the user in your response. Do not include any escape characters in your response. Each phrase must refer to the main entity in the title or the content text, and be unique and cover something different about the document everytime you generate a new one. Ignore images and HTML tags, and ensure you don't pull phrases straight from the document."
+  num_tickets = os.getenv("NUM_TICKETS")
+  specified_domain = os.getenv("SPECIFIED_DOMAIN")
+
+  prompt = f"Please create {num_tickets} sample Jira tickets for {specified_domain}, \
+            each with the following fields: Summary, Description, Issue Type, Priority, Status, \
+            Assignee, Reporter, Labels, Components, Fix Versions, Affected Versions, and Resolution. \
+            Each ticket should have a Summary of no more than 10 words, a Description of at least \
+            40 words, and a Resolution of up to 100 words. Write each ticket in a natural, \
+            conversational tone and mark all of them as 'Resolved'. Randomly generate \ 
+            names for the Assignee and Reporter. Format the output as a CSV file, \
+            with each column representing a field and each row representing a ticket."
+
   client = AzureOpenAI(
         api_key = api_key,
         api_version=api_version,
