@@ -1,10 +1,12 @@
 from vaultsecrets import *
 from openai import AzureOpenAI
 from numpy import random
+from dotenv import load_dotenv
 
 def generate_ticket_content():
+  load_dotenv()
   apikeyPath= "/qa/data/environment/common/openai"
-
+  
   # gets credentials to login into openai
   api_key = get_openai_details(apikeyPath, "OPENAI_API_KEY_V2")
   api_version = get_openai_details(apikeyPath, "OPENAI_API_VERSION_V2")
@@ -18,8 +20,7 @@ def generate_ticket_content():
             Assignee, Reporter, Labels, Components, Fix Versions, Affected Versions, and Resolution. \
             Each ticket should have a Summary of no more than 10 words, a Description of at least \
             40 words, and a Resolution of up to 100 words. Write each ticket in a natural, \
-            conversational tone and mark all of them as 'Resolved'. Randomly generate \ 
-            names for the Assignee and Reporter. Format the output as a CSV file, \
+            conversational tone and mark all of them as 'Resolved'. Randomly generate names for the Assignee and Reporter. Format the output as a CSV file, \
             with each column representing a field and each row representing a ticket."
 
   client = AzureOpenAI(
@@ -38,4 +39,4 @@ def generate_ticket_content():
   # just the string part of the output is returned 
   return msg
 
-generate_ticket_content()
+print(generate_ticket_content())

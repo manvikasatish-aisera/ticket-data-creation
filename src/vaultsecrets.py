@@ -1,5 +1,6 @@
 import requests
 import os
+from dotenv import load_dotenv
 
 def authenticate_with_github(vault_address, github_token):
     auth_url = f"{vault_address}/v1/auth/github/login"
