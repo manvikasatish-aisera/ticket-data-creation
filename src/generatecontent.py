@@ -38,5 +38,3 @@ def generate_ticket_content():
   msg = completion.choices[0].message.content
   # just the string part of the output is returned 
   return msg
-
-print(generate_ticket_content())
