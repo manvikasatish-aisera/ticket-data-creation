@@ -2,10 +2,10 @@ from vaultsecrets import *
 from openai import AzureOpenAI
 from numpy import random
 
-def send_prompt_with_document(section, title):
+def generate_ticket_content():
   apikeyPath= "/qa/data/environment/common/openai"
 
-  #gets credentials to login into openai
+  # gets credentials to login into openai
   api_key = get_openai_details(apikeyPath, "OPENAI_API_KEY_V2")
   api_version = get_openai_details(apikeyPath, "OPENAI_API_VERSION_V2")
   azure_endpoint = get_openai_details(apikeyPath, "OPENAI_API_ENDPOINT_V2")
@@ -29,13 +29,13 @@ def send_prompt_with_document(section, title):
   
   # Sends the prompt and document to gpt-4, asking for a random 'temperature' between 0 and 1 to create some diversity in responses.
   completion = client.chat.completions.create(
-  model = "gpt4",
-  temperature = round(random.uniform(0,1), 1),
-  messages=[
-    {"role": "system", "content": '[Document Title] \n"' + title + '"\n\n[Document Content]\n<<' + section + ">>\n###\n"},
-    {"role": "user", "content": '[Prompt]\n"' + prompt + '"'}
-  ]
+    model = "gpt4",
+    temperature = round(random.uniform(0,1), 1),
+    messages=[{"role": "user", "content": prompt}]
   )
+  
   msg = completion.choices[0].message.content
-  #just the string part of the output is returned 
+  # just the string part of the output is returned 
   return msg
+
+generate_ticket_content()
