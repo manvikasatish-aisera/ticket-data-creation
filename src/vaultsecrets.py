@@ -1,5 +1,6 @@
 import requests
 import os
+from dotenv import load_dotenv
 
 def authenticate_with_github(vault_address, github_token):
     auth_url = f"{vault_address}/v1/auth/github/login"
@@ -29,6 +30,7 @@ def get_secret_key_v1(vault_address, github_token, secret_path, key):
     return apikey
   
 def get_openai_details(path, key):
+    load_dotenv()
     vault_address = os.getenv('VAULT_ADDR')
     github_token = os.getenv('GITHUB_TOKEN')
     secret_path = path
