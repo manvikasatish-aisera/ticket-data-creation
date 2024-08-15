@@ -1,1 +1,3 @@
 src/.env
+src/__pycache__
+src/vaultsecrets.py

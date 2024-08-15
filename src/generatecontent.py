@@ -1,6 +1,6 @@
 from vaultsecrets import *
 from openai import AzureOpenAI
-from numpy import random
+from random import uniform
 from dotenv import load_dotenv
 
 def generate_ticket_content():
@@ -29,7 +29,7 @@ def generate_ticket_content():
   # Sends the prompt and document to gpt-4, asking for a random 'temperature' between 0 and 1 to create some diversity in responses.
   completion = client.chat.completions.create(
     model = "gpt4",
-    temperature = round(random.uniform(0,1), 1),
+    temperature = round(uniform(0,1), 1),
     messages=[{"role": "user", "content": prompt}]
   )
   
