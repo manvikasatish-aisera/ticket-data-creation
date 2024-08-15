@@ -19,7 +19,8 @@ def generate_ticket_content():
             Summary, but the column name should be 'Subject', and Description. Each ticket should have a Summary of no more than 10 words and a Description of at least \
             40 words, but make sure it's written in a casual, conversational tone with a few minor spelling mistakes and \
             grammatical errors — nothing extremely drastic, just enough to feel authentic. Ensure all tickets are marked as \
-            'Resolved'. Format the output as a CSV file, with each column representing a field and each row representing a ticket."
+            'Resolved'. Format the output as a CSV file, with each column representing a field and each row representing a ticket. \
+            Make some tickets very specific (mentions specific tools, errors, technologies), some not so detailed."
 
   client = AzureOpenAI(
         api_key = api_key,

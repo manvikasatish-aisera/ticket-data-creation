@@ -21,15 +21,9 @@ def read_tickets():
         file.write(csv_file.getvalue())
 
 def bulk_upload():
-    # username = os.getenv("SF_USERNAME")
-    # password = os.getenv("SF_PASSWORD")
-    # security_token = os.getenv("SEC_TOKEN")
     session_id = os.getenv("SESSION_ID")
 
-    # session id and host work
-    
-    #bulk = SalesforceBulk(username='vishnupriya.valleri@aisera.com.staging0ticketai', password='VWG!ebm*acb8tzm*jbp', security_token='Vgbj4JZPbvMC4eIl2Zs9Qkk5', host=urlparse('https://staging0-ticketai-dev-ed.lightning.force.com/').hostname)
-   
+    # session id and host work   
     bulk = SalesforceBulk(sessionId=session_id, host=urlparse('https://staging0-ticketai-dev-ed.lightning.force.com/').hostname)
     print("got here.")
     job = bulk.create_insert_job("ticket_info", contentType='CSV', concurrency='Parallel')
