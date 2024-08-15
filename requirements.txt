@@ -1,0 +1,8 @@
+openai
+salesforce_bulk
+io
+csv
+os
+urllib.parse
+numpy
+dotenv

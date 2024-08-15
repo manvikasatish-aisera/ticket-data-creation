@@ -13,15 +13,13 @@ def generate_ticket_content():
   azure_endpoint = get_openai_details(apikeyPath, "OPENAI_API_ENDPOINT_V2")
     
   num_tickets = os.getenv("NUM_TICKETS")
-  specified_domain = os.getenv("SPECIFIED_DOMAIN")
+  specified_domain = os.getenv("DOMAIN")
 
-  prompt = f"Please create {num_tickets} sample Jira tickets for {specified_domain}, \
-            each with the following fields: Summary, Description, Issue Type, Priority, Status, \
-            Assignee, Reporter, Labels, Components, Fix Versions, Affected Versions, and Resolution. \
-            Each ticket should have a Summary of no more than 10 words, a Description of at least \
-            40 words, and a Resolution of up to 100 words. Write each ticket in a natural, \
-            conversational tone and mark all of them as 'Resolved'. Randomly generate names for the Assignee and Reporter. Format the output as a CSV file, \
-            with each column representing a field and each row representing a ticket."
+  prompt = f"Please create {num_tickets} sample Jira tickets for {specified_domain}, each with the following fields: \
+            Summary, but the column name should be 'Subject', and Description. Each ticket should have a Summary of no more than 10 words and a Description of at least \
+            40 words, but make sure it's written in a casual, conversational tone with a few minor spelling mistakes and \
+            grammatical errors — nothing extremely drastic, just enough to feel authentic. Ensure all tickets are marked as \
+            'Resolved'. Format the output as a CSV file, with each column representing a field and each row representing a ticket."
 
   client = AzureOpenAI(
         api_key = api_key,
