@@ -42,5 +42,6 @@ def bulk_upload():
     bulk.close_job(job)
     print("Data successfully uploaded!")
 
+# uncomment line below for full functionality, right now commented to test bulk upload login. 
 #read_tickets()
 bulk_upload()
